@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Cute+Font|Open+Sans&display=swap');
+
+$paddingOne : 15px;
+$paddingTwo : 20px;
+$colors : (
+   primary : rgba(0,0,0,0.87),
+   primaryLight: lighten(rgba(0,0,0,0.87), 40%),
+   primaryDark: darken(rgba(0,0,0,0.87), 40%),
+   accent : #fff6bb,
+   myLite: #fff
+);
+
+$desktop: 840px; 
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content
+    }
+};
+
+@function color($data) {
+    @return  map-get($map: $colors, $key: $data)
+};
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  #main-background {
+    background-color: color(primary);
+    clip-path: polygon(100% 0, 100% 82%, 45% 100%, 0 100%, 0 0);
+    height: 100%;
+    width: 100%; 
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    @include desktop {
+        clip-path: polygon(0 0%, 75% 0, 55% 100%, 0% 100%);
+    }
+};
+header a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.6em;
+    padding: $paddingOne;
+    display: block;
+    text-transform: uppercase;
+    // font-weight: 700
+};
+}
+
+main {
+    @include desktop {
+        display: grid;
+        grid-template-columns: 50% auto;
+        grid-template-areas: 'section-two section-one'
+
+    }
+    .section-one {
+        background-color: color(myLite);
+        padding: $paddingTwo;
+        margin: 1em auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        @include desktop {
+            grid-area: section-one;
+            height: fit-content;
+            align-self: center;
+            margin: 1em;
+         };
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            li {
+                margin-bottom: 10px;
+                span {
+                   position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    background-color: color(primaryLight);
+                    border-radius: 50%;
+                    margin-right: 10px
+                }
+                strong {
+                    display: inline-block;
+                    margin-left: max(40px);
+                    margin-top: 10px
+                }
+            }
+        }
+
+    };
+    .section-two {
+        text-align: center;
+        padding: $paddingOne;
+       color: color(myLite);
+       font-family: 'Cute Font', cursive;
+       @include desktop {
+           grid-area: section-two;
+           text-align: left;
+           margin: 4em 0 0 4em;
+
+       }
+    };
+    h1 {
+       font-size:  3em;
+       margin-bottom: 10px;
+       text-transform: uppercase;
+       @include desktop {
+           width: 30%;
+           font-size: 4em;
+           line-height: 1.1em;
+        }
+
+    };
+    p {
+        font-size: 1.4em;
+        @include desktop {
+            width: 80%;
+         }
+    };
+    a {
+        color: color(primaryDark);
+        border-radius: $paddingOne;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 700;
+        background-color: color(accent);
+        text-align: center;
+        display: block;
+        margin: 50px auto 0 auto;
+        padding: $paddingOne;
+        font-family: 'Open Sans', sans-serif;
+        @include desktop {
+           display: inline-block;
+           padding: $paddingOne $paddingOne * 4
+         }
+    }
+
+}
